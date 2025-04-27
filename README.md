@@ -7,7 +7,7 @@ The objective of this project is to build an end-to-end Security Operations Cent
 1. **Architecture Design**  
    - Draw.io logical diagram of VMs, network segments, and ELK components
    
-   ![1  Block Diagram](https://github.com/user-attachments/assets/c234a80b-6c80-4301-91ab-d6bb0d9d488e)
+   ![1  Block Diagram](https://github.com/user-attachments/assets/b0f06441-bae9-46f6-8062-9b5cd35325b7)
 
 2. **VM Deployment**  
    | VM            | Role                     | OS          |
@@ -19,90 +19,109 @@ The objective of this project is to build an end-to-end Security Operations Cent
    | Windows Server| Domain controller & logs | Windows 2022|
    | Kali Linux    | Attack platform          | Kali Linux  |
 
-![2  Virtual Machines](https://github.com/user-attachments/assets/8c090246-0600-473a-8efb-009273510a01)
+![2  Virtual Machines](https://github.com/user-attachments/assets/d4eca1b2-8765-499c-8ae0-68df7cf0c79d)
 
 3. **ELK & Agent Installation**  
    - Installed Elasticsearch & Kibana; accessed via `http://<ELK_IP>:5601`  
-   - Deployed Elastic Agent & Sysmon on Windows hosts  
+   - Deployed Elastic Agent & Sysmon on Windows hosts
+
+![6  Sysmon](https://github.com/user-attachments/assets/b734824a-b654-460d-8ce3-852a0d3a99f3)
+
+![7  Elastic Agent](https://github.com/user-attachments/assets/b24aaaf1-c095-498f-ad8e-c90dde784a83)
+
    - Configured Fleet Server and ingested Sysmon & Defender logs  
 
-![10  Ingested Logs](https://github.com/user-attachments/assets/a563eb8f-0c7c-43c8-b8b3-9781d982a299)
+![8  Fleet Server](https://github.com/user-attachments/assets/40c83393-9cce-4620-aeb5-640f996db905)
+
+![10  Ingested Logs](https://github.com/user-attachments/assets/1f5eecd4-6a73-4dcd-9324-45ee49965264)
+
 
 ## 🔐 Step 2: Secure Access & Brute‑Force Detection  
 1. **Service Enablement**  
    - RDP on `Win22-Agent`, SSH on `Ubuntu-Agent`  
 2. **Attack Simulation**  
-   - Ran Crowbar brute‑force against RDP/SSH from Kali  
+   - Ran Crowbar brute‑force against RDP/SSH from Kali
+
+![12  RDP Brute Force](https://github.com/user-attachments/assets/17edb3f7-3568-43fa-8631-c2b6dcf37cbc)
+     
 3. **Alerting & Dashboards**  
    - Created detection rules for Event IDs (4625, 4624)  
    - Built Kibana dashboards to track success/failure trends
 
 ### RDP Dashboard
-![16  RDP Dashboard](https://github.com/user-attachments/assets/2bbc7dc3-f8da-4cf0-bab8-7d0bf5aff69d)
+![16  RDP Dashboard](https://github.com/user-attachments/assets/82b4bdc2-5450-4a33-b250-bb6109ff3dad)
 
 ### SSH Dashboard
-![15  SSH Dashboard](https://github.com/user-attachments/assets/1d0a0577-10eb-4d41-baee-6df682a75072)
+![15  SSH Dashboard](https://github.com/user-attachments/assets/25e69937-6b72-4283-b368-8f0e4eefb0fa)
 
 ## 🕹️ Step 3: Mythic C2 Simulation  
 1. **Mythic Deployment**  
    - Installed Mythic C2 on `Ubuntu-Mythic`
      
-   ####  ![17  Mythic](https://github.com/user-attachments/assets/1b0d57a5-e0fd-4860-99bb-167cab16352e)
+   ####  ![17  Mythic](https://github.com/user-attachments/assets/51353bad-55a1-4700-bcd3-ba92bf26940c)
 
 3. **Attack Flow Diagram**  
    - Phases: Initial Access → Discovery → Evasion → Execution → C2 → Exfiltration
      
 #### 1. Phase-1 Initial Access 
 
-![18  Phase-1](https://github.com/user-attachments/assets/a790166e-d896-463b-ada3-4a3c143fa602)
+![18  Phase-1](https://github.com/user-attachments/assets/bf52e2eb-aa61-4e5b-aab1-dd4aba04fa9e)
 
 #### 2. Phase-2 Discovery 
-![19  Phase-2](https://github.com/user-attachments/assets/ad96189d-4d33-41be-bb35-35f15ca1e1b5)
+![19  Phase-2](https://github.com/user-attachments/assets/c5549404-a559-4871-8fa6-bdb58e05207d)
 
 #### 3. Phase-3 Defender Evasion 
-![20  Phase-3](https://github.com/user-attachments/assets/6c5918e8-c2f2-438d-b82a-3ed852bdd180)
+![20  Phase-3](https://github.com/user-attachments/assets/8a206132-aeb6-4187-bd2d-b62070fab68c)
 
 #### 4. Phase-4 Execution 
-![21  Phase-4](https://github.com/user-attachments/assets/f515c3dc-e571-4360-9988-7c575b6d576f)
+![21  Phase-4](https://github.com/user-attachments/assets/f6586aba-ec5a-4956-91a7-b85686bfe1d0)
 
 #### 5. Phase-5 Command & Control 
-![22  Phase-5](https://github.com/user-attachments/assets/9cfca8fb-5b76-47ec-b98c-a35a647675d4)
+![22  Phase-5](https://github.com/user-attachments/assets/e73efc61-74e1-450d-a07d-6b0584e0540e)
 
 #### 6. Phase-6 Exfiltration 
-![23  Phase-6](https://github.com/user-attachments/assets/40bcece7-eeae-4a33-bac1-645696b86470)
+![23  Phase-6](https://github.com/user-attachments/assets/3e23e166-a942-4d16-97b4-58074e7613e8)
 
 3. **Detection**  
-   - Configured alerts & dashboards for each phase  
+   - Configured alerts & dashboards for each phase
+
+![25  Dashboard Attack](https://github.com/user-attachments/assets/929279ca-ea4d-4bf4-9003-e4526d9fab75)
+
    - Mapped ATT&CK IDs (T1136.001, T1059.001, etc.)  
 
-![27  Alerts](https://github.com/user-attachments/assets/021084cc-0dd3-4b94-baa0-59bcedc82fc5)
+![27  Alerts](https://github.com/user-attachments/assets/21aa194e-1f28-4fc3-99f2-6bdacaa79e40)
 
-![27 1 Alerts](https://github.com/user-attachments/assets/4a271cc6-8983-4024-b81b-5d243e2156ae)
+![27 1 Alerts](https://github.com/user-attachments/assets/93e406a8-fb36-4549-8b18-ad0acd47c13b)
 
 ## 🎟️ Step 4: Automated Ticketing & Response  
 1. **osTicket Integration**  
-   - Deployed osTicket; configured webhook in Kibana  
+   - Deployed osTicket; configured webhook in Kibana
+
+![28  OSTICKET](https://github.com/user-attachments/assets/3214cb6d-0d9b-4e5d-8772-ff4e94ed9edf)
+
+![29  Webhook](https://github.com/user-attachments/assets/63ec32d8-50b5-4906-8bab-fd16e50a728b)
+
    - Alerts auto-create tickets for triage
      
-![OsTicket alert](https://github.com/user-attachments/assets/6eadb12f-6c2b-4cc0-8de1-3353048a36db)
+![OsTicket alert](https://github.com/user-attachments/assets/00127306-f869-4cf2-97f8-99ac4b8ffa40)
 
 2. **Endpoint Defense**  
    - Enabled Elastic Defender; blocked suspicious executables  
    - Automated isolation of compromised hosts
 
-![32  Elastic Endpoint ](https://github.com/user-attachments/assets/5cc3cf37-df3b-421b-8ae6-e45b747ff249)
+![32  Elastic Endpoint ](https://github.com/user-attachments/assets/452cf769-9659-43a0-9061-5e123c50d728)
    
 3. **Incident Workflow**  
    - **Isolate → Investigate → Contain → Remediate → Recover → Document → Learn**
 
 ### Alert Triggered 
-![31  Malware alert](https://github.com/user-attachments/assets/ce0c9f6f-390b-4458-b825-801c373e0128)
+![31  Malware alert](https://github.com/user-attachments/assets/9d1bfa10-7cc6-4104-a61b-72d4f88461b5)
 
 ### Host Isolated
-![Screenshot 2024-10-21 105017](https://github.com/user-attachments/assets/47b2119f-88ff-4e96-b846-8d74b2855e88)
+![Screenshot 2024-10-21 105017](https://github.com/user-attachments/assets/9db787e7-8aad-4c23-aeb9-e1b1304b45ca)
 
 ### Threat Remediated
-![34  Isolated](https://github.com/user-attachments/assets/4d658dcd-25fa-4124-a439-df745fc94ab5)
+![34  Isolated](https://github.com/user-attachments/assets/0ddf3335-4cd7-4147-bac5-57b555ffdd0a)
 
 ## 🔑 Key Takeaways  
 - **Scalable Logging:** ELK + Elastic Agent for comprehensive telemetry  
